@@ -39,8 +39,14 @@ date || credit || debit || balance
 10/01/2012 || 1000.00 || || 1000.00
 ```
 |
+
+## Methodology
+The bank account was initially built as one class with three methods.
+A decision was made to extract the balance and the private methods associated with it into a seperate class
+
 ## Run the program
 Use IRB
 
-## Run the test
-Use RSpec in the command line 
+## Run the tests
+Use RSpec in the command line
+Use Rubocop in the command line 
