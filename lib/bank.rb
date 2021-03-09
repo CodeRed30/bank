@@ -1,43 +1,31 @@
+# frozen_string_literal: false
+
+require_relative 'Balance'
+
 # Account
 class Account
-  attr_reader :balance
-
   def initialize
-    @balance = 0
+    @balance = Balance.new
     @transactions = []
   end
 
   def deposit(amount, date)
-    amount = sprintf('%05.2f', amount)
-    balance = add_balance(amount)
-    @transactions.unshift([date, amount << " ", nil, balance])
+    amount = format('%05.2f', amount)
+    balance = format('%05.2f', @balance.add_balance(amount))
+    @transactions.unshift([date, amount << ' ', nil, balance])
   end
 
   def withdraw(amount, date)
-    amount = sprintf('%05.2f', amount)
-    balance = deduct_balance(amount)
-    @transactions.unshift([date, nil, amount << " ", balance])
+    amount = format('%05.2f', amount)
+    balance = format('%05.2f', @balance.deduct_balance(amount))
+    @transactions.unshift([date, nil, amount << ' ', balance])
   end
 
   def statement
-    statement_text = "date || credit || debit || balance"
+    statement_text = 'date || credit || debit || balance'
     @transactions.each do |date, credit, debit, balance|
       statement_text << "\n#{date} || #{credit}|| #{debit}|| #{balance}"
     end
     statement_text
-  end
-
-  private
-
-  def add_balance(amount)
-    @balance += amount.to_i
-    balance = sprintf('%05.2f', @balance)
-    return balance
-  end
-
-  def deduct_balance(amount)
-    @balance -= amount.to_i
-    balance = sprintf('%05.2f', @balance)
-    return balance
   end
 end
