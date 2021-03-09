@@ -40,5 +40,6 @@ A decision was made to extract the balance and the private methods associated wi
 Use IRB
 
 ## Run the tests
-Use RSpec in the command line
-Use Rubocop in the command line
+``` Bundle ``` to install the gems
+Use ```rspec``` in the command line
+Use ```rubocop``` in the command line
