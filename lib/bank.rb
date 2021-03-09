@@ -9,8 +9,7 @@ class Account
 
   def deposit(amount, date)
     amount = sprintf('%05.2f', amount)
-    @balance += amount.to_i
-    balance = sprintf('%05.2f', @balance)
+    balance = add_balance(amount)
     @transactions.unshift([date, amount << " ", nil, balance])
   end
 
@@ -20,5 +19,13 @@ class Account
       statement_text << "\n#{date} || #{credit}|| #{debit}|| #{balance}"
     end
     statement_text
+  end
+
+  private
+
+  def add_balance(amount)
+    @balance += amount.to_i
+    balance = sprintf('%05.2f', @balance)
+    return balance
   end
 end
