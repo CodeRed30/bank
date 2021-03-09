@@ -13,6 +13,12 @@ class Account
     @transactions.unshift([date, amount << " ", nil, balance])
   end
 
+  def withdraw(amount, date)
+    amount = sprintf('%05.2f', amount)
+    balance = deduct_balance(amount)
+    @transactions.unshift([date, nil, amount << " ", balance])
+  end
+
   def statement
     statement_text = "date || credit || debit || balance"
     @transactions.each do |date, credit, debit, balance|
@@ -25,6 +31,12 @@ class Account
 
   def add_balance(amount)
     @balance += amount.to_i
+    balance = sprintf('%05.2f', @balance)
+    return balance
+  end
+
+  def deduct_balance(amount)
+    @balance -= amount.to_i
     balance = sprintf('%05.2f', @balance)
     return balance
   end
